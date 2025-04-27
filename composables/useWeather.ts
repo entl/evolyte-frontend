@@ -2,11 +2,10 @@ import {ref} from 'vue'
 import {toast} from '~/components/ui/toast'
 import type {WeatherRequest, WeatherResponse} from '~/types/weather'
 
-const API_URL = "http://localhost:8001/api/v1/weather"
-
 export function useWeather() {
     const weatherData = ref<WeatherResponse | null>(null);
     const isLoading = ref(false);
+    let apiUrl = useRuntimeConfig().public.apiBase + '/weather';
     const fetchWeather = async (params: WeatherRequest) => {
         try {
             const queryParams = new URLSearchParams({
@@ -16,7 +15,7 @@ export function useWeather() {
                 end_date: params.end_date.toString(),
             });
 
-            const response = await fetch(`${API_URL}?${queryParams.toString()}`, {
+            const response = await fetch(`${apiUrl}?${queryParams.toString()}`, {
                 method: "GET",
                 headers: { "Accept": "application/json" },
             });

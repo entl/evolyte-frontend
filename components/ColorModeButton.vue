@@ -26,12 +26,10 @@ onBeforeMount(() => {
 <template>
   <Button @click="toggleTheme" variant="ghost" class="p-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition">
     <template v-if="!isDark">
-<!--      <Sun class="w-5 h-5 text-gray-900"/>-->
       <Icon name="solar:sun-bold" class="w-5 h-5 text-gray-900" />
     </template>
     <template v-else>
       <Icon name="solar:moon-bold" class="w-5 h-5 text-gray-100" />
-<!--      <Moon class="w-5 h-5 text-gray-100"/>-->
     </template>
   </Button>
 </template>

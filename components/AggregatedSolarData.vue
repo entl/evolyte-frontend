@@ -41,7 +41,7 @@ const props = defineProps<{
   cols?: number; // Number of columns in the grid
 }>();
 
-// Fix: Explicitly map grid class names instead of relying on dynamic string generation
+// Explicitly map grid class names instead of relying on dynamic string generation
 const gridColsClass = computed(() => {
   const gridClasses = {
     1: "grid-cols-1",

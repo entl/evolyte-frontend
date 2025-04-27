@@ -18,8 +18,6 @@ const EUROPE_MARKERS = [
   { location: [59.3293,  18.0686], size: 0.05 }, // Stockholm
   { location: [37.9838,  23.7275], size: 0.05 }, // Athens
   { location: [53.3498,  -6.2603], size: 0.04 }, // Dublin
-
-  // ─── New UK entries ─────────────────────────────
   { location: [51.5074,  -0.1278], size: 0.06 }, // London
   { location: [52.2053,   0.1218], size: 0.05 }, // Cambridge
 ]
@@ -136,6 +134,4 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style scoped>
-/* You can add any additional styling here */
-</style>
+
