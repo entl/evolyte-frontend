@@ -1,75 +1,136 @@
-# Nuxt Minimal Starter
+# EvoLyte Frontend
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is the frontend application for **EvoLyte**, a solar energy forecasting platform that visualises solar panel locations and predicts energy production and CO₂ savings based on user inputs.
 
-## Setup
+The frontend is built with [Nuxt 3](https://nuxt.com/), and communicates with backend services and machine learning models to display real-time forecasts and system information.
 
-Make sure to install dependencies:
+---
+
+## Project Structure
+
+This frontend is part of the **EvoLyte** project, which consists of:
+- Two backend services (API server and ML service)
+- Machine Learning models for solar energy prediction
+- This frontend application for user interaction and visualisation
+
+All components of the EvoLyte project are available on GitHub under the **EvoLyte** repositories.
+
+---
+
+## Features
+
+- Visualises clusters and detailed locations of solar PV panels on a map
+- Allows users to input parameters (system size, location, tilt, azimuth) to generate custom forecasts
+- Displays predicted energy production, CO₂ savings, and financial savings
+- Integrates real-time weather information
+- Responsive, clean user interface
+
+---
+
+## Setup Instructions
+
+### 1. Install Dependencies
+
+Ensure you have [Node.js](https://nodejs.org/) installed.
+
+Then install project dependencies listed in `package.json`:
 
 ```bash
-# npm
+# Using npm
 npm install
 
-# pnpm
+# Using pnpm
 pnpm install
 
-# yarn
+# Using yarn
 yarn install
 
-# bun
+# Using bun
 bun install
 ```
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+### 2. Configure Environment Variables
+
+Create a `.env` file in the root directory with the following content:
+
+```env
+NUXT_BASE_API_URL=your_backend_api_url
+```
+
+This sets the base URL for the backend API connection.  
+Make sure the EvoLyte backend services are running and accessible.
+
+---
+
+### 3. Start Development Server
+
+Start the development server at `http://localhost:3000`:
 
 ```bash
-# npm
+# Using npm
 npm run dev
 
-# pnpm
+# Using pnpm
 pnpm dev
 
-# yarn
+# Using yarn
 yarn dev
 
-# bun
+# Using bun
 bun run dev
 ```
 
-## Production
+The application will reload automatically on code changes.
+
+---
+
+## Building for Production
 
 Build the application for production:
 
 ```bash
-# npm
+# Using npm
 npm run build
 
-# pnpm
+# Using pnpm
 pnpm build
 
-# yarn
+# Using yarn
 yarn build
 
-# bun
+# Using bun
 bun run build
 ```
 
-Locally preview production build:
+Preview the production build locally:
 
 ```bash
-# npm
+# Using npm
 npm run preview
 
-# pnpm
+# Using pnpm
 pnpm preview
 
-# yarn
+# Using yarn
 yarn preview
 
-# bun
+# Using bun
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+---
+
+## Deployment
+
+For detailed deployment guidance, refer to the [Nuxt Deployment Documentation](https://nuxt.com/docs/getting-started/deployment).
+
+---
+
+## Additional Information
+
+- This project is one part of the complete **EvoLyte** system.
+- All EvoLyte components (frontend, backends, ML models) can be found under the **EvoLyte** repositories on GitHub.
+
+---
