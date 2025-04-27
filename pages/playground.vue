@@ -153,7 +153,9 @@ onMounted(() => resume())
   <div class="min-h-screen flex flex-col">
     <!-- Navbar -->
     <header class="w-full py-4 px-8 flex justify-between items-center shadow-md border-b bg-background">
-      <h1 class="text-xl font-bold" @click="goToLanding">EvoLyte</h1>
+      <h1 class="text-xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent hover:cursor-pointer" @click="goToLanding">
+            EvoLyte
+      </h1>
       <div class="flex items-center space-x-4">
         <Button>Register</Button>
         <Button>Sign In</Button>
