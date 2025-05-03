@@ -4,6 +4,10 @@ This is the frontend application for **EvoLyte**, a solar energy forecasting pla
 
 The frontend is built with [Nuxt 3](https://nuxt.com/), and communicates with backend services and machine learning models to display real-time forecasts and system information.
 
+> **Note:**  
+> This repository is actively being developed as part of my personal learning.  
+> For the version submitted for the final university project, please refer to commit [`ac5bacf`](https://github.com/entl/evolyte-frontend/tree/ac5bacf168872ce0d4be5e91beac0a82bc0ca5aa).
+
 ---
 
 ## Project Structure
