@@ -17,7 +17,6 @@ const { solarForecast, fetchSolarForecast, isLoading } = useSolarForecast();
 const { coords, locatedAt, error, resume, pause } = useGeolocation();
 const { weatherData: currentWeatherData, fetchWeather: fetchCurrentWeather } = useWeather();
 const { weatherData: formWeatherData, fetchWeather: fetchFormWeather } = useWeather();
-const router = useRouter();
 
 const today = new Date();
 const form = reactive<SolarPredictionForm>({
@@ -142,10 +141,6 @@ const moneySavedForPeriod = () => {
   );
 };
 
-const goToLanding = () => {
-  router.push('/');
-};
-
 onMounted(() => resume())
 </script>
 
@@ -153,9 +148,7 @@ onMounted(() => resume())
   <div class="min-h-screen flex flex-col">
     <!-- Navbar -->
     <header class="w-full py-4 px-8 flex justify-between items-center shadow-md border-b bg-background">
-      <h1 class="text-xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent hover:cursor-pointer" @click="goToLanding">
-            EvoLyte
-      </h1>
+      <Logo></Logo>
       <div class="flex items-center space-x-4">
         <Button>Register</Button>
         <Button>Sign In</Button>

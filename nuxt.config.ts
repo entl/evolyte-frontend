@@ -1,33 +1,3 @@
-// // https://nuxt.com/docs/api/configuration/nuxt-config
-// import { resolve } from "path";
-//
-// export default defineNuxtConfig({
-//   compatibilityDate: '2024-11-01',
-//   devtools: { enabled: true },
-//   css: ["~/assets/css/tailwind.css"],
-//
-//   postcss: {
-//     plugins: {
-//       tailwindcss: {},
-//       autoprefixer: {},
-//     },
-//   },
-//
-//   modules: ["shadcn-nuxt"],
-//
-//   shadcn: {
-//     /**
-//      * Prefix for all the imported component
-//      */
-//     prefix: '',
-//     /**
-//      * Directory that the component lives in.
-//      * @default "./components/ui"
-//      */
-//     componentDir: './components/ui'
-//   }
-// })
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import {resolve} from "path";
 
@@ -45,7 +15,8 @@ export default defineNuxtConfig({
         'shadcn-nuxt',
         '@nuxtjs/color-mode',
         '@nuxt/icon',
-        '@nuxtjs/leaflet'
+        '@nuxtjs/leaflet',
+        '@pinia/nuxt'
     ],
     leaflet: {
         markerCluster: true
@@ -68,6 +39,12 @@ export default defineNuxtConfig({
          * @default "./components/ui"
          */
         componentDir: './components/ui'
+    },
+    colorMode: {
+        classSuffix: '', // so it uses `dark` instead of `dark-mode`
+        storageKey: 'darkMode',
+        preference: 'system',
+        fallback: 'light',
     },
     runtimeConfig: {
         public: {
