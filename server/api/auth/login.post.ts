@@ -1,39 +1,46 @@
-import { defineEventHandler, H3Event, readBody, appendHeader, createError } from 'h3'
-import { serverApi } from '../utils/serverApi'
-
-export default defineEventHandler (async event => {
-  console.log('login.post.ts')
-  const api = serverApi(event)
-  console.log('api', api)
-  const { password, email } = await readBody(event)
-  console.log('password', password)
-  // create form
-  const form = new URLSearchParams()
-  form.append('password', password)
-  form.append('username', email)
-
-
+export default defineEventHandler(async (event) => {
   try {
+    const apiBase = useRuntimeConfig().public.apiBase
+    const body = await readBody(event)
 
-    // Do the actual request to the external API
-    const res = await api.raw('/auth/login', 'POST', {
+    const form = new URLSearchParams()
+    form.append('username', body.email)
+    form.append('password', body.password)
+
+    const rawResponse = await fetch(apiBase + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: form,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
+      credentials: 'include',
     })
 
-    const cookies = (res?.headers.get('set-cookie') || '').split(',')
+    const data = await rawResponse.json()
 
-    for (const cookie of cookies) {
-      appendHeader(event, 'set-cookie', cookie)
+    if (data.access_token && data.refresh_token) {
+      setCookie(event, 'access_token', data.access_token, {
+        httpOnly: false,
+        secure: false,
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 15, // 15 min
+      })
+
+      setCookie(event, 'refresh_token', data.refresh_token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+      })
+
+      return {
+        status: 'success'
+      }
     }
-
-
-    return { message: 'success' }
-
-  } catch (err) {
-    throw createError('An error occurred while fetching the data.')
+  } catch (error: any) {
+    throw createError({
+      statusCode: error.statusCode || 500,
+      statusMessage: error.message || 'Internal Server Error'
+    })
   }
-
 })
