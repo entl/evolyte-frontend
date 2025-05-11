@@ -1,4 +1,5 @@
 <script setup>
+import { NuxtLink } from "#components";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -47,7 +48,9 @@ const goToPlayground = () => {
             <a href="#" class="text-muted-foreground hover:text-primary transition-colors duration-200">Docs</a>
           </div>
           <div class="flex items-center gap-4">
-            <Button variant="ghost" class="hidden sm:flex">Log in</Button>
+            <NuxtLink to="/login">
+              <Button variant="ghost" class="hidden sm:flex">Log in</Button>
+            </NuxtLink>
             <ColorModeButton />
           </div>
         </div>
@@ -72,17 +75,20 @@ const goToPlayground = () => {
             Join the future of renewable energy by leveraging our smart forecasting and solar technology.
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Button class="w-full sm:w-auto bg-orange-500 text-white hover:bg-orange-600 dark:bg-white dark:text-background dark:hover:bg-white/90 px-8 py-6 text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200">
-              Sign Up
-            </Button>
-            <Button 
-              @click="goToPlayground" 
+            <NuxtLink to="/registration">
+              <Button class="w-full sm:w-auto bg-orange-500 text-white hover:bg-orange-600 dark:bg-white dark:text-background dark:hover:bg-white/90 px-8 py-6 text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200">
+                Sign Up
+              </Button>
+            </NuxtLink>
+            <NuxtLink to="/playground">
+              <Button 
               class="w-full sm:w-auto px-8 py-6 text-lg font-medium transition-all duration-200
-                     bg-white/80 hover:bg-white/90 text-gray-800 border border-gray-300/50
-                     dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:border-white/20
-                     backdrop-blur-sm shadow-lg hover:shadow-xl">
+              bg-white/80 hover:bg-white/90 text-gray-800 border border-gray-300/50
+              dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:border-white/20
+              backdrop-blur-sm shadow-lg hover:shadow-xl">
               Go to Playground
             </Button>
+          </NuxtLink>
           </div>
         </div>
       </div>

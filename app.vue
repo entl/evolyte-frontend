@@ -3,10 +3,10 @@
 </script>
 
 <template>
-  <div>
+  <NuxtLayout>
     <Toaster></Toaster>
     <NuxtPage />
-  </div>
+  </NuxtLayout>
 </template>
 
 <style>
