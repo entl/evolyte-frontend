@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { useAuthService } from '~/composables/useAuthService';
 import { useRouter } from 'vue-router'
+import { useAuthApi } from '~/composables/api/useAuthApi'
 
-const authService = useAuthService()
 const router = useRouter()
+const authApi = useAuthApi()
 
 const handleLogin = async (email: string, password: string): Promise<void> => {
-  await authService.login(email, password)
-  // await router.push('/app/dashboard')
+  console.log(email, password)
+  const response = await authApi.login({email, password})
+  console.log(response)
+  await router.push('/app/dashboard')
 }
 
 </script>
@@ -36,45 +38,9 @@ const handleLogin = async (email: string, password: string): Promise<void> => {
     </div>
 
     <!-- <Button @click="handleLogout">Logout</Button> -->
+    <!-- <Button @click="handleRefreshToken">refresh</Button> -->
 </template>
 
 <style>
 
 </style>
-
-
-<!-- <template>
-  <div>
-      <input placeholder="E-Mail" v-model="email" >
-      <input placeholder="Password" v-model="password" >
-      <button @click="login()">Login</button>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { useStore } from '~/store/store';
-import { useAuthService } from '~/composables/useAuthService';
-
-
-const email = ref('')
-const password = ref('')
-const authService = useAuthService()
-const store = useStore()
-const router = useRouter()
-async function login() {
-  try {
-      await authService.login(email.value, password.value)
-      const user = await authService.getUser()
-      console.log(user)
-      store.setUser(user)
-      router.push('/')
-  } catch (e) {
-      console.log(e)
-  }
-}
-
-</script>
-
-<style scoped>
-
-</style> -->
