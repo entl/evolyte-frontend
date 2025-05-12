@@ -11,47 +11,67 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-// Menu items.
-const items = [
+// Menu topGroup.
+const topGroup = [
   {
-    title: "Home",
+    title: "Overview",
     url: "#",
-    icon: Home,
+    icon: "lucide:home",
   },
   {
-    title: "Inbox",
+    title: "Analyse",
     url: "#",
-    icon: Inbox,
+    icon: "lucide:inbox",
   },
   {
-    title: "Calendar",
+    title: "Performance",
     url: "#",
-    icon: Calendar,
+    icon: "lucide:calendar",
   },
   {
-    title: "Search",
+    title: "Report",
     url: "#",
-    icon: Search,
+    icon: "lucide:search",
+  },
+  {
+    title: "System",
+    url: "#",
+    icon: "lucide:settings",
+  },
+  {
+    title: "My Site",
+    url: "#",
+    icon: "lucide:home",
+  }
+];
+
+const bottomGroup = [
+  {
+    title: "Report",
+    url: "#",
+    icon: "lucide:home",
   },
   {
     title: "Settings",
     url: "#",
-    icon: Settings,
-  },
+    icon: "lucide:settings",
+  }
 ];
 </script>
 
 <template>
   <Sidebar>
-    <SidebarContent>
+    <SidebarHeader>
+      <Logo class="mt-1 pt-4 ml-2"/>
+    </SidebarHeader>
+    <SidebarContent class="mt-2 justify-between">
       <SidebarGroup>
-        <SidebarGroupLabel>Application</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
-            <SidebarMenuItem v-for="item in items" :key="item.title">
-              <SidebarMenuButton asChild>
+            <SidebarMenuItem v-for="item in topGroup" :key="item.title">
+              <SidebarMenuButton asChild class="h-12">
                 <a :href="item.url">
-                  <component :is="item.icon" />
+                  <Icon :name="item.icon" class="h-5 w-5" />
                   <span>{{item.title}}</span>
                 </a>
               </SidebarMenuButton>
@@ -59,6 +79,54 @@ const items = [
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
+      <SidebarGroup>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem v-for="item in bottomGroup" :key="item.title">
+              <SidebarMenuButton asChild class="h-12">
+                <a :href="item.url">
+                  <Icon :name="item.icon" class="h-5 w-5" />
+                  <span>{{item.title}}</span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild class="h-12">
+                <ColorModeButton class="p-0" :button-text="'Switch Color Mode'"/>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
     </SidebarContent>
+    <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton>
+                  <div class="mr-2 h-8 w-8 rounded-full bg-gray-700"></div>
+                  <User2 /> Username
+                  <ChevronUp class="ml-auto" />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                side="top"
+                class="w-[--reka-popper-anchor-width]"
+              >
+                <DropdownMenuItem>
+                  <span>Account</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <span>Billing</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <span>Sign out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
   </Sidebar>
 </template>
