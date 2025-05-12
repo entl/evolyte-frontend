@@ -1,9 +1,9 @@
 <template>
-  <Card class="h-full flex flex-col shadow-lg">
+  <Card class="w-full h-full flex flex-col shadow-lg">
     <CardTitle class="pt-4 px-4">
       <h2 class="text-lg font-semibold">Forecasted Energy Production</h2>
     </CardTitle>
-    <div class="flex-1 h-full">
+    <div class="flex-1 h-full pb-2">
       <LineChart
         class="h-full w-full"
         :data="chartData"

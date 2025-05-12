@@ -7,13 +7,20 @@ const colorMode = useColorMode()
 const toggle = () => {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
+
+const props = defineProps({
+  buttonText: {
+    type: String,
+    default: ''
+  }
+})
 </script>
 
 <template>
   <Button
     @click="toggle"
     variant="ghost"
-    class="p-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition"
+    class="p-2 rounded-md"
   >
     <!-- Show sun icon for light mode -->
     <Icon
@@ -27,5 +34,6 @@ const toggle = () => {
       name="solar:moon-bold"
       class="w-5 h-5 text-gray-100"
     />
+    <span>{{buttonText}}</span>
   </Button>
 </template>
