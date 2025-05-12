@@ -13,7 +13,8 @@ export function useSolarForecast() {
                 return;
             }
 
-            const API_URL = "http://127.0.0.1:8001/api/v1/predict/time-series"; // Example API URL
+            let apiBase = useRuntimeConfig().public.apiBase + '/predict/time-series';
+
             isLoading.value = true;
 
             const payload = {
@@ -27,7 +28,7 @@ export function useSolarForecast() {
                 end: form.dateRange.end.toString(),
             };
 
-            const response = await fetch(API_URL, {
+            const response = await fetch(apiBase, {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
