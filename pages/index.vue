@@ -37,9 +37,7 @@ const goToPlayground = () => {
     <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-background/80 border-b border-border/40">
       <div class="container mx-auto">
         <div class="flex h-16 items-center justify-between px-4">
-          <h1 class="text-xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
-            EvoLyte
-          </h1>
+          <Logo />
           <div class="hidden md:flex space-x-8">
             <a href="#" class="text-muted-foreground hover:text-primary transition-colors duration-200">How It Works</a>
             <a href="#" class="text-muted-foreground hover:text-primary transition-colors duration-200">Case Studies</a>
