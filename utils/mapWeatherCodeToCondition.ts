@@ -283,9 +283,10 @@ const weather_codes: Record<string, {day: WeatherCondition; night: WeatherCondit
     }
 } as const;
 
-export default function mapWeatherCodeToCondition (weather: HourlyWeatherData): WeatherCondition {
-    const weather_code = weather.weather_code.toString();
-    const is_day = weather.is_day === 1 ? "day" : "night";
+
+export default function mapWeatherCodeToCondition (weatherCode: number, isDay: number): WeatherCondition {
+    const weather_code = weatherCode.toString();
+    const is_day = isDay === 1? "day" : "night";
 
     if (!weather_codes[weather_code] || !weather_codes[weather_code][is_day]) {
         return {
