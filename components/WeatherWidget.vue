@@ -86,7 +86,7 @@ watchEffect(() => {
           console.error('Failed to fetch city name:', err)
         })
 
-    weatherCondition.value = mapWeatherCodeToCondition(weatherDataHourly.value)
+    weatherCondition.value = mapWeatherCodeToCondition(weatherDataHourly.value.weather_code, weatherDataHourly.value.is_day)
   } else {
     weatherDataHourly.value = null
     cityName.value = ''
