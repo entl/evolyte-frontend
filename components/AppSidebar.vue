@@ -91,8 +91,8 @@ const bottomGroup = [
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild class="h-12">
-                <ColorModeButton class="p-0" :button-text="'Switch Color Mode'"/>
+              <SidebarMenuButton asChild class="h-12 justify-start">
+                <ColorModeButton :button-text="'Switch Color Mode'"/>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
@@ -104,7 +104,7 @@ const bottomGroup = [
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
+                <SidebarMenuButton class="h-12">
                   <div class="mr-2 h-8 w-8 rounded-full bg-gray-700"></div>
                   <User2 /> Username
                   <ChevronUp class="ml-auto" />
