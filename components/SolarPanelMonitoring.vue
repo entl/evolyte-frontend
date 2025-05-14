@@ -46,7 +46,7 @@
                 <span class="text-gray-500">
                   Output Share
                 </span>
-                <Progress v-model="progress" class="w-3/5" />
+                <Progress v-model="progress" class="w-full" />
               </div>
             </div>
           </div>

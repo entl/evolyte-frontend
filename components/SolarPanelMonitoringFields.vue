@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col rounded-md bg-gray-900 h-full w-full py-2 px-4">
+    <div class="flex flex-col rounded-lg dark:bg-gray-900 bg-secondary h-full w-full py-2 px-4">
       <div class="font-light text-gray-500">
         {{ props.name  }}
       </div>
