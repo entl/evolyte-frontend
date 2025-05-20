@@ -1,44 +1,54 @@
-import type { RefreshTokenResponse, LoginResponse } from "~/types/auth";
+import type { TokenPairResponse } from "~/types/api/auth";
+import type ErrorResponse from "~/types/api/error";
+
+
+type LoginPayload = { email: string; password: string };
+
+type ApiResult<T = unknown, E = ErrorResponse> = {
+  data?: T;
+  error?: E;
+};
 
 export const useAuthApi = () => {
-  const login = async (payload: { email: string; password: string }) => {
+  const login = async (payload: LoginPayload): Promise<ApiResult<TokenPairResponse>> => {
     try {
-      const res = await $fetch<LoginResponse>('/api/auth/login', {
+      const res = await $fetch<TokenPairResponse>('/api/auth/login', {
         method: 'POST',
         body: payload,
         credentials: 'include',
-      })
-      return true
-    } catch (error) {
-      return false
+      });
+      return { data: res };
+    } catch (error: any) {
+      const Error: ErrorResponse = parseApiError(error);
+      return { error: Error };
     }
-  }
+  };
 
-  const refresh = async () => {
+  const refresh = async (): Promise<ApiResult<TokenPairResponse>> => {
     try { 
-      console.log('refresh client api')
-      const res = await $fetch<RefreshTokenResponse>('/api/auth/refresh', {
+      const res = await $fetch<TokenPairResponse>('/api/auth/refresh', {
         method: 'POST',
         credentials: 'include',
-      })
-      return true
-    } catch (error) {
-      return false
+      });
+      return { data: res };
+    } catch (error: any) {
+      const Error: ErrorResponse = parseApiError(error);
+      return { error: Error };
     }
-  }
+  };
 
-  const logout = async () => {
+  const logout = async (): Promise<ApiResult> => {
     try {
-      console.log('logout client api')
       await $fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include',
-      })
-      return true
-    } catch (error) {
-      return false
+      });
+      return { data: {} };
+    } catch (error: any) {
+      const Error: ErrorResponse = parseApiError(error);
+      return { error: Error };
     }
-  }
+  };
 
-  return { login, refresh, logout }
-}
+  return { login, refresh, logout };
+};

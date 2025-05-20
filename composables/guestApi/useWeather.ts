@@ -1,6 +1,6 @@
 import {ref} from 'vue'
 import {toast} from '~/components/ui/toast'
-import type {WeatherRequest, WeatherResponse} from '~/types/weather'
+import type {WeatherRequest, WeatherResponse} from '~/types/api/weather'
 
 export function useWeather() {
     const weatherData = ref<WeatherResponse | null>(null);
