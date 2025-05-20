@@ -43,12 +43,10 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, watchEffect } from 'vue'
-import { Card, CardContent } from '@/components/ui/card'
-import type {HourlyWeatherData, WeatherCondition, WeatherResponse } from '~/types/weather'
-import { WeatherGroupBackgrounds } from '~/types/weather'
+import type {HourlyWeatherData, WeatherCondition, WeatherResponse } from '@/types/api/weather'
+import { WeatherGroupBackgrounds } from '~/types/api/weather'
 import { fetchCityName } from '@/utils/geo'
-import mapWeatherCodeToCondition from "~/utils/mapWeatherCodeToCondition";
+import mapWeatherCodeToCondition from "@/utils/mapWeatherCodeToCondition";
 
 const props = defineProps<{
   weatherData: WeatherResponse | null

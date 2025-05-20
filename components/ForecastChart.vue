@@ -20,7 +20,7 @@
 import { defineProps, computed } from 'vue'
 import { Card, CardTitle } from '@/components/ui/card'
 import { LineChart } from '~/components/ui/chart-line'
-import type { PredictionResponse } from "~/types/prediction"
+import type { PredictionResponse } from "~/types/api/prediction"
 
 const props = defineProps<{
   forecastData: PredictionResponse[] | []

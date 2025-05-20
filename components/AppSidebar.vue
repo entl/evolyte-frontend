@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-vue-next"
+import { Calendar, ChevronUp, ChevronDown, Home, Inbox, Search, Settings, User } from "lucide-vue-next"
 import {
   Sidebar,
   SidebarContent,
@@ -10,6 +10,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { useUserStore } from "~/storages/userStorage"
+
+
+const userStore = useUserStore()
+const currentUser = computed(() => userStore.currentUser)
+
+
+const isDropdownOpen = ref(false)
 
 // Menu topGroup.
 const topGroup = [
@@ -102,12 +110,12 @@ const bottomGroup = [
     <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <DropdownMenu>
+            <DropdownMenu v-model:open="isDropdownOpen">
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton class="h-12">
                   <div class="mr-2 h-8 w-8 rounded-full bg-gray-700"></div>
-                  <User2 /> Username
-                  <ChevronUp class="ml-auto" />
+                  <User2 /> {{currentUser?.full_name ?? "User"}} 
+                  <component :is="isDropdownOpen ? ChevronUp : ChevronDown" class="ml-auto h-4 w-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent

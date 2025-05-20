@@ -61,12 +61,11 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
-import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet'
-import {ClusteredSolarPanelsResponse, type SolarPanelResponse} from "~/types/solarPanels";
-import {fetchClusteredSolarPanels} from "~/server/fetchClusteredSolarPanels";
-import {awaitExpression} from "@babel/types";
-import {fetchSolarPanelsInBounds} from "~/server/fetchSolarPanelsInBounds";
+import type {ClusteredSolarPanelsResponse,  SolarPanelResponse} from "~/types/api/solarPanels";
+import { useSolarPanelsApi } from "~/composables/api/useSolarPanels";
+
+
+const { getPanelsInBounds, getClusteredSolarPanels } = useSolarPanelsApi()
 
 // state of checkbox
 let showSolarPanels = ref(false);
@@ -97,22 +96,24 @@ const onBoundsChange = async (e: any) => {
     return
   }
   if (zoom.value < 12) {
-    clusters.value = await fetchClusteredSolarPanels(
+    const {data, error} = await getClusteredSolarPanels(
         bounds.value._southWest.lat,  // min_lat
         bounds.value._northEast.lat,  // max_lat
         bounds.value._southWest.lng,  // min_lon
         bounds.value._northEast.lng,  // max_lon
         zoom.value
     );
+    clusters.value = data
     console.log("clusters", clusters.value)
   }
   if (zoom.value >= 12) {
-    panels.value = await fetchSolarPanelsInBounds(
+    const {data, error} = await getPanelsInBounds(
         bounds.value._southWest.lat,  // min_lat
         bounds.value._northEast.lat,  // max_lat
         bounds.value._southWest.lng,  // min_lon
         bounds.value._northEast.lng,  // max_lon
     )
+    panels.value = data
     console.log("panels", panels.value)
   }
 }
@@ -146,7 +147,8 @@ const onMapClick = (e: any) => {
 }
 
 onMounted(async () => {
-  clusters.value = await fetchClusteredSolarPanels(bounds.value._northEast.lat, bounds.value._southWest.lat, bounds.value._northEast.lng, bounds.value._southWest.lng, zoom.value)
+  const {data, error} = await getClusteredSolarPanels(bounds.value._northEast.lat, bounds.value._southWest.lat, bounds.value._northEast.lng, bounds.value._southWest.lng, zoom.value)
+  clusters.value = data
 })
 </script>
 

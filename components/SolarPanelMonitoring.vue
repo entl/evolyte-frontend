@@ -30,7 +30,7 @@
           </div>
           <div class="flex flex-col w-1/2"> 
             <SelectSolarPanel class="w-fit" :items="selectPanels"/>
-            <div class="flex flex-col mt-4 gap-4">
+            <div class="flex flex-col flex-1 py-4 gap-4 justify-between">
                 <SolarPanelMonitoringIndividialInfo :iconName="'ph:battery-charging-vertical'" 
                 :featureName="'Efficiency'" :featureValue="'66 %'" :feature-color="'text-green-500'"/>
                 
