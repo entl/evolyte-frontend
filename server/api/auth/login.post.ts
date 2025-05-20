@@ -1,3 +1,5 @@
+import type { TokenPairResponse } from "~/types/api/auth"
+
 export default defineEventHandler(async (event) => {
   try {
     const apiBase = useRuntimeConfig().public.apiBase
@@ -14,7 +16,7 @@ export default defineEventHandler(async (event) => {
       credentials: 'include',
     })
 
-    const data = await rawResponse.json()
+    const data = await rawResponse.json() as TokenPairResponse
 
     if (data.access_token && data.refresh_token) {
       setCookie(event, 'access_token', data.access_token, {

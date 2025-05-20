@@ -1,4 +1,4 @@
-import type {HourlyWeatherData, WeatherCondition} from "~/types/weather";
+import type {HourlyWeatherData, WeatherCondition} from "~/types/api/weather";
 
 const weather_codes: Record<string, {day: WeatherCondition; night: WeatherCondition}> = {
     "0": {

@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted, watchEffect, nextTick } from 'vue'
-import { useRouter } from 'vue-router'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
-import { toast } from "~/components/ui/toast";
-import { CalendarDate, type DateValue, isEqualMonth } from '@internationalized/date'
-import { useSolarForecast } from "~/composables/useSolarForecast";
+import { toast } from "~/components/ui/toast/use-toast";
+import { CalendarDate } from '@internationalized/date'
+import { useSolarForecast } from "~/composables/guestApi/useSolarForecast";
 import { useGeolocation } from "@vueuse/core";
-import { useWeather } from "~/composables/useWeather";
-import type { WeatherRequest, WeatherResponse } from "~/types/weather";
+import { useWeather } from "~/composables/guestApi/useWeather";
+import type { WeatherRequest, WeatherResponse } from "~/types/api/weather";
 import type SolarPredictionForm from "~/types/solarPredictionForm";
 import type AggregatedSolarData from "~/types/aggregatedSolarData";
 import { formatDecimalPoints } from "~/utils/formatDecimalPoints";
@@ -22,10 +18,10 @@ const today = new Date();
 const form = reactive<SolarPredictionForm>({
   lat: 0,
   lon: 0,
-  kwp: null,
-  tilt: null,
-  azimuth: null,
-  kwh_price: null,
+  kwp: 0,
+  tilt: 0,
+  azimuth: 0,
+  kwh_price: 0,
   loss: 0,
   dateRange: {
     start: new CalendarDate(today.getFullYear(), today.getMonth() + 1, today.getDate()),
@@ -127,7 +123,7 @@ const co2SavedForPeriod = () => {
   if (!solarForecast.value) return 0;
 
   return formatDecimalPoints(
-    solarForecast.value.reduce((acc, curr) => acc + curr.co2_saved, 0),
+    solarForecast.value.reduce((acc: number, curr: { co2_saved: number }) => acc + curr.co2_saved, 0),
     2
   );
 };
@@ -136,7 +132,7 @@ const moneySavedForPeriod = () => {
   if (!solarForecast.value) return 0;
 
   return formatDecimalPoints(
-    solarForecast.value.reduce((acc, curr) => acc + curr.money_saved, 0),
+    solarForecast.value.reduce((acc: number, curr: {money_saved: number}) => acc + curr.money_saved, 0),
     2
   );
 };

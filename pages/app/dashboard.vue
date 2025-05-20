@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import EnergyProducedChart from '~/components/EnergyProducedChart.vue';
 import { useUsersApi } from '~/composables/api/useUsersApi';
-import { useSolarDashboard } from '~/composables/useSolarDashboard';
-
+import { useSolarForecast } from '~/composables/guestApi/useSolarForecast';
+import { useUserStore } from '~/storages/userStorage';
 definePageMeta({
   middleware: 'auth',
   layout: 'authorised',
 })
 
 const usersApi = useUsersApi()
-const { solarForecast, fetchSolarForecast, isLoading } = useSolarForecast();
+const userStore = useUserStore()
+const { solarForecast, fetchSolarForecast, isLoading } = useSolarForecast()
 
-
-const currentUser = ref(null)
 
 const getCurrentUserDetails = async () => {
-  const data = await usersApi.getCurrentUser()
-  currentUser.value = data
+  const {data, error} = await usersApi.getCurrentUser()
+  if (data) {
+    userStore.setUser(data)
+  }
 }
 
 

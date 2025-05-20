@@ -1,6 +1,6 @@
-import type { WeatherResponse } from "~/types/weather";
+import type { WeatherResponse } from "~/types/api/weather";
 import type AggregatedSolarData from "~/types/aggregatedSolarData";
-import type {PredictionResponse, TimeSeriesPredictionResponse} from "~/types/prediction";
+import type {PredictionResponse, TimeSeriesPredictionResponse} from "~/types/api/prediction";
 
 export default function calculateAggregatedSolarData(
     weatherData: WeatherResponse,
