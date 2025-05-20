@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 import { useAuthApi } from '~/composables/api/useAuthApi'
 
 const router = useRouter()
@@ -10,6 +9,10 @@ const handleLogin = async (email: string, password: string): Promise<void> => {
   const response = await authApi.login({email, password})
   console.log(response)
   await router.push('/app/dashboard')
+}
+
+const handleGoogleLogin = async (): Promise<void> => {
+  await navigateTo('/auth/google', { external: true })
 }
 
 </script>
@@ -23,7 +26,7 @@ const handleLogin = async (email: string, password: string): Promise<void> => {
         </div>
         <div class="flex flex-1 items-center justify-center">
           <div class="w-full max-w-xs">
-            <LoginForm :onLogin="handleLogin" />
+            <LoginForm :onLogin="handleLogin" :onGoogleLogin="handleGoogleLogin" />
           </div>
         </div>
       </div>
@@ -36,9 +39,6 @@ const handleLogin = async (email: string, password: string): Promise<void> => {
         <div class="absolute inset-0 bg-gradient-to-r from-background to-transparent"></div>
       </div>
     </div>
-
-    <!-- <Button @click="handleLogout">Logout</Button> -->
-    <!-- <Button @click="handleRefreshToken">refresh</Button> -->
 </template>
 
 <style>

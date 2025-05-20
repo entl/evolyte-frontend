@@ -3,6 +3,12 @@ import {resolve} from "path";
 
 export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
+    alias: {
+        '@': resolve(__dirname, './'),
+        '@components': resolve(__dirname, './components'),
+        '@api': resolve(__dirname, './composables/api'),
+        '@utils': resolve(__dirname, './lib/utils'),
+    },
     devtools: {
         enabled: true,
 
@@ -11,12 +17,13 @@ export default defineNuxtConfig({
         }
     },
     modules: [
-        '@nuxtjs/tailwindcss',
-        'shadcn-nuxt',
-        '@nuxtjs/color-mode',
-        '@nuxt/icon',
-        '@nuxtjs/leaflet',
-        '@pinia/nuxt'
+      '@nuxtjs/tailwindcss',
+      'shadcn-nuxt',
+      '@nuxtjs/color-mode',
+      '@nuxt/icon',
+      '@nuxtjs/leaflet',
+      '@pinia/nuxt',
+      'nuxt-auth-utils'
     ],
     leaflet: {
         markerCluster: true
@@ -49,6 +56,13 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             apiBase: process.env.NUXT_BASE_API_URL,
+        },
+        oauth: {
+            // provider in lowercase (github, google, etc.)
+            google: {
+              clientId: process.env.NUXT_GOOGLE_CLIENT_ID,
+              clientSecret: process.env.NUXT_GOOGLE_CLIENT_SECRET,
+            }
         }
     }
 })

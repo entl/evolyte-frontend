@@ -1,13 +1,27 @@
-<script setup>
-const email = ref('')
-const password = ref('')
+<script setup lang="ts">
+import { useUsersApi } from '~/composables/api/useUsersApi'
+import type { UserCreate } from '~/types/api/user'
 
-const handleLogin = async () => {
+const userApi = useUsersApi()
+const router = useRouter()
+
+const handleRegistration = async (userData: UserCreate) => {
   try {
-    // Add your login logic here
-    console.log('Login attempt with:', { email: email.value, password: password.value })
+    const response = await userApi.createUser(userData)
+
+    await router.push('login')
+    console.log(response)
   } catch (error) {
-    console.error('Login error:', error)
+    console.error(error)
+  }
+}
+
+const handleGoogleRegistratrion = async () => {
+  try {
+    await navigateTo('/auth/google', {external: true})
+    console.log('Google login attempt')
+  } catch (error) {
+    console.error('Google login error:', error)
   }
 }
 
@@ -22,7 +36,7 @@ const handleLogin = async () => {
         </div>
         <div class="flex flex-1 items-center justify-center">
           <div class="w-full max-w-xs">
-            <RegistrationForm />
+            <RegistrationForm :onRegister="handleRegistration" :onGoogleRegister="handleGoogleRegistratrion"/>
           </div>
         </div>
       </div>
